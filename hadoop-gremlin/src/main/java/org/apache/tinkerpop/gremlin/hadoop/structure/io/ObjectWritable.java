@@ -66,7 +66,7 @@ public final class ObjectWritable<T> implements WritableComparable<ObjectWritabl
         // Spark's background logging apparently tries to log a `toString()` of certain objects while they're being
         // modified, which then throws a ConcurrentModificationException. We probably can't make any arbitrary object
         // thread-safe, but we can easily retry on such cases and eventually we should always get a result.
-        final int maxAttempts = 5;
+        final int maxAttempts = 50;
         for (int i = maxAttempts; ;) {
             try {
                 return Objects.toString(this.t);
